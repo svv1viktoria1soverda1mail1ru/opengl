@@ -1,0 +1,36 @@
+typedef struct
+{
+    float mat[3][3];
+}matrix3x3_t;
+void MatrixAdd(matrix3x3_t* matrixA, matrix3x3_t* matrixB, matrix3x3_t* resultMatrix){
+    //A+B=result
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            resultMatrix->mat[row][col]=matrixA->mat[row][col]+matrixB->mat[row][col];
+        }
+    }
+}
+
+void ScalarMatrixMult(float scalarValue, matrix3x3_t *matrixA, matrix3x3_t *resultMatrix)
+{
+    //scalarValue*A=result
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            resultMatrix->mat[row][col]=scalarValue* matrixA->mat[row][col];
+        }
+    }
+}
+
+void MatrixMult(matrix3x3_t* matrixA, matrix3x3_t* matrixB, matrix3x3_t* resultMatrix)
+{
+    float sum;
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            sum=0;
+            for(int k=0;k<3;k++){
+                sum+=matrixA->mat[row][k]*matrixB->mat[k][col];
+            }
+            resultMatrix->mat[row][col]=sum;
+        }
+    }
+}
