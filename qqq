@@ -1,0 +1,49 @@
+void GLWidget::paintGL()
+{
+    static GLfloat fElect1 = 0.0f;
+    // Clear the window with current clearing color
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Reset the modelview matrix
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    // Translate the whole scene out and into view
+    // This is the initial viewing transformation
+    glTranslatef(0.0f, 0.0f, -100.0f);
+    glTranslatef(0.0f, -2.0f, -5.0f);
+    // Red Nucleus
+    glColor3ub(255, 0, 0);
+   gluSphere(q, 6.0f, 15, 15);
+    // Yellow Electrons
+    glColor3ub(255,255,0);
+    // First Electron Orbit
+    // Save viewing transformation
+    glPushMatrix();
+    // Rotate by angle of revolution
+    glRotatef(fElect1, 0.0f, 1.0f, 0.0f);
+    // Translate out from origin to orbit distance
+    glTranslatef(90.0f, 0.0f, 0.0f);
+    // Draw the electron
+    //glutSolidSphere(6.0f, 15, 15);
+    gluSphere(q, 6.0f, 15, 15);
+    // Restore the viewing transformation
+    glPopMatrix();
+    glPushMatrix();
+    glRotatef(45.0f, 0.0f, 0.0f, 1.0f);
+    glRotatef(fElect1, 0.0f, 1.0f, 0.0f);
+    glTranslatef(-70.0f, 0.0f, 0.0f);
+    gluSphere(q, 6.0f, 15, 15);
+    glPopMatrix();
+    // Third Electron Orbit
+    glPushMatrix();
+    glRotatef(360.0f, -45.0f, 0.0f, 1.0f);
+    glRotatef(fElect1, 0.0f, 1.0f, 0.0f);
+    glTranslatef(0.0f, 0.0f, 60.0f);
+    gluSphere(q, 6.0f, 15, 15);
+    glPopMatrix();
+    // Increment the angle of revolution
+    fElect1 += 10.0f;
+    if(fElect1 > 360.0f)
+    fElect1 = 0.0f;
+    // Show the image
+   // glutSwapBuffers();
+   електрони
